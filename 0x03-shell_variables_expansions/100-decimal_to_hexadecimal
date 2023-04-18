@@ -1,2 +1,2 @@
 #!/bin/bash
-printf "%" $DECIMAL | sort
+printf "%x" $DECIMAL | sort
