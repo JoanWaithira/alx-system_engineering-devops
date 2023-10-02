@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#A script that does the defined instructions
+
+cleanup(){
+	 rm /var/run/myscript.pid
+}
+
+echo "$$" > /var/run/myscript.pid
+
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+	trap 'echo "I hate the kill command" && cleanup' SIGTERM
+	trap 'echo "Y U no love me?!"' SIGINT
+	trap cleanup SIGQUIT
+done
