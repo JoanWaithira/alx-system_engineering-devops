@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Using what you did for task #0, make your fix short and sweet.
+sudo apt-get update
+sudo apt-get install -y nginx
+sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+service nginx restart
 
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx start
-kill "$(pgrep 'nginx' | head -1)"
