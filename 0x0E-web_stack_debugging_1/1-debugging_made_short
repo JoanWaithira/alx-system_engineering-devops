@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Using what you did for task #0, make your fix short and sweet.
+# Debugging port 80
+
 rm /etc/nginx/sites-enabled/default
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-nginx -t && service nginx restart
-
+nginx -t
+service nginx restart
