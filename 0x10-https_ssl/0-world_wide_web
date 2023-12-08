@@ -1,20 +1,28 @@
 #!/usr/bin/env bash
-# a Bash script that sets up your web servers for the deployment of web_static
+# a Bash script that sets up your web servers for the deployment of web_servers
 
-domain_information() {
+display_info() {
     local domain="$1"
     local subdomain="$2"
-    local line
-    line=$(dig "$subdomain"."$domain" | awk '/ANSWER SECTION:/ {getline; print; getline; print}')
-    echo "$subdomain $line" | awk '{printf "The subdomain %s is a %s record and points to %s\n", $1, $2, $3}'
+
+    dig_output=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION:/,/^$/')
+
+    record_type=$(echo "$dig_output" | awk '/IN\s+[A-Z]+/ {print $4}')
+    destination=$(echo "$dig_output" | awk '/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/ {print $5}')
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
 
+# Main script
 if [ "$#" -eq 1 ]; then
-    domain_information "$1" "www"
-    domain_information "$1" "lb-01"
-    domain_information "$1" "web-01"
-    domain_information "$1" "web-02"
+    # Display information for default subdomains
+    display_info "$1" "www"
+    display_info "$1" "lb-01"
+    display_info "$1" "web-01"
+    display_info "$1" "web-02"
 elif [ "$#" -eq 2 ]; then
-    domain_information "$1" "$2"
+    # Display information for specified subdomain
+    display_info "$1" "$2"
+else
+    echo "Usage: $0 <domain> [subdomain]"
 fi
 
