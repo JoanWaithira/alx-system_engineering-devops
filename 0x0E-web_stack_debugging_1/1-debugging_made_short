@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Using what you did for task #0, make your fix short and sweet.
 
-sudo apt update
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo service nginx restart
-rm /run/nginx.pid
+service nginx start
+kill "$(pgrep 'nginx' | head -1)"
