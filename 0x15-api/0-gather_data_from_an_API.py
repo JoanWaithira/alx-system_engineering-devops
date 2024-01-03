@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ A script that returns infrmatin about an employee"""
-import sys
 import requests
+import sys
 
 
 if __name__ == "__main__":
