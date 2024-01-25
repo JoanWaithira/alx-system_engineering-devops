@@ -33,7 +33,7 @@ rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
 
         location /airbnb-onepage/ {
                 alias ~/AirBnB_clone_v2/;
-                proxy_pass http://0.0.0.0:5000;
+                proxy_pass http://127.0.0.1:5000;
         }
 
 
